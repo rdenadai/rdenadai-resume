@@ -1,0 +1,32 @@
+{% extends 'resume/base.html' %}
+{% load i18n %}
+
+{% block content %}
+<div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--12-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone" style="margin: 8px 8px 8px 0px;">
+        <div class="blog-card-wide mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+            <div class="mdl-color-text--grey-700 mdl-card__supporting-text" style="margin: 0 auto;">
+                <div class="blog-text">
+                    <article class="markdown-body">
+                        <form method="post" action="" class="form-horizontal style-form">
+                            <fieldset>
+                                <legend>
+                                    <h2><i class="fa fa-frown-o"></i>&nbsp;{% blocktrans %}Page not found!{% endblocktrans %}</h2>
+                                </legend>
+                                <div>
+                                    {% blocktrans %}
+                                    We could found the page you are looking for, to get back to the main screen <a href="/">click here</a>.
+                                    {% endblocktrans %}
+                                </div>
+                                <div class="pull-right">
+                                    <a href="/" style="text-decoration: none; color: #333;" class="mdl-button mdl-js-button mdl-button--raised"><i class="fa fa-reply"></i>&nbsp;{% blocktrans %}Return{% endblocktrans %}</a>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

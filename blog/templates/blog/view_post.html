@@ -1,0 +1,100 @@
+{% extends 'resume/base.html' %}
+{% load markdown_filter %}
+{% load i18n %}
+{%block meta %}
+<meta property="og:title" content="{{ post.title|safe }}"/>
+<meta property="og:image" content="{{ MEDIA_URL }}{{ post.image }}"/>
+<meta property="og:description" content="{{ post.description|safe }}{% for category in post.category.all %}#{{ category.name }} {% endfor %}"/>
+{% endblock %}
+{%block content %}
+{% spaceless %}
+<div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--12-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone" style="margin: 8px 8px 8px 0px;">
+        <div class="blog-card-wide mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+            <div class="mdl-card__title mdl-color-text--grey-50" style="background: url('{{ MEDIA_URL }}{{ post.image }}') center / cover; height: 250px;">
+                <h2 class="mdl-card__title-text blog-title"><strong>{{ post.title|safe }}</strong></h2>
+            </div>
+
+            <div id="post-content-info" class="mdl-color-text--grey-700 mdl-card__supporting-text meta" style="margin: 0 auto; width: 100%;">
+                <div class="section-spacer"></div>
+                <div>
+                    <span>{% blocktrans %}Posted{% endblocktrans %} {{ days_ago }} {% blocktrans %}day(s) ago{% endblocktrans %}</span>
+                </div>&nbsp;&nbsp;&nbsp;
+                <div class="mdl-card__menu">
+                    <button id="btn-share-slugname{{ post.slug }}" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                        <i class="material-icons">share</i>
+                    </button>
+                    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="btn-share-slugname{{ post.slug }}">
+                        <li class="mdl-menu__item">
+                            <a class="btn-share" href="javascript:void(0);" onclick="window.open('http://twitter.com/intent/tweet?text={{ post.title }} =>&url=http://{{ request.META.HTTP_HOST }}/blog/view/{{ post.slug }}.html&via=rdenadai', 'page','toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=500,height=300')">
+                                <button class="btn-twitter mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+                                    <i class="fa fa-twitter"></i>
+                                </button>&nbsp;&nbsp;Twitter
+                            </a>
+                        </li>
+                        <li class="mdl-menu__item">
+                            <a class="btn-share" href="javascript:void(0);" onclick="window.open('http://www.facebook.com/share.php?u=http://{{ request.META.HTTP_HOST }}/blog/view/{{ post.slug }}.html&title={{ post.title }}', 'page','toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=500,height=300');">
+                                <button class="btn-facebook mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+                                    <i class="fa fa-facebook"></i>
+                                </button>&nbsp;&nbsp;Facebook
+                            </a>
+                        </li>
+                        <li class="mdl-menu__item">
+                            <a class="btn-share" href="javascript:void(0);" onclick="window.open('https://plus.google.com/share?url=http://{{ request.META.HTTP_HOST }}/blog/view/{{ post.slug }}.html', 'page','toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=500,height=300');">
+                                <button class="btn-gplus mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+                                    <i class="fa fa-google-plus"></i>
+                                </button>&nbsp;&nbsp;Google+
+                            </a>
+                        </li>
+                        <li class="mdl-menu__item">
+                            <a class="btn-share" href="javascript:void(0);" onclick="window.open('http://www.linkedin.com/shareArticle?mini=true&url=http://{{ request.META.HTTP_HOST }}/blog/view/{{ post.slug }}.html&title={{ post.title }}&source=rdenadai.com.br', 'page','toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=500,height=300');">
+                                <button class="btn-linkedin mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+                                    <i class="fa fa-linkedin"></i>
+                                </button>&nbsp;&nbsp;Linked In
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mdl-color-text--grey-700 mdl-card__supporting-text" style="margin: 0 auto;">
+                <div class="blog-text">
+                    <article class="markdown-body">
+                        {{ post.body|markdownify|safe }}
+                    </article>
+                </div>
+                <br />
+                {% for category in post.category.all %}
+                    <a href="/blog/category/1/{{ category.slug }}.html" class="label label-default"><i class="fa fa-bookmark"></i>&nbsp;{{ category }}</a>
+                {% endfor %}
+            </div>
+            <br /><br /><hr style="margin: 15px;" /><br />
+            <div id="disqus_thread" style="padding: 15px;"></div>
+            <noscript>{% blocktrans %}Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.{% endblocktrans %}</a></noscript>
+        </div>
+    </div>
+</div>
+{% endspaceless %}
+{% endblock %}
+
+{% block jquery_block %}
+    /**
+     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+     */
+    var disqus_config = function () {
+        this.page.url = "localhost";  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = "rdenadaicombr.disqus.com"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    (function() {  // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = '//rdenadaicombr.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+{% endblock %}
+
+
+{% block no_jquery_block %}
+
+{% endblock %}

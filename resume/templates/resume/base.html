@@ -1,0 +1,146 @@
+{% load background_image %}
+{% load i18n %}
+{% spaceless %}
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Rodolfo De Nadai</title>
+        <link rel="icon" type="image/png" href="{{ STATIC_URL }}/img/favicon.ico">
+        <link rel="alternate" href="http://www.rdenadai.com.br" hreflang="en" />
+        <meta name="description" content="{% blocktrans %}This is Rodolfo De Nadai blog, resume, website...{% endblocktrans %}">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {%block meta %}{% endblock %}
+        <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-indigo.min.css" />
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        {% load compress %}
+        {% compress css %}
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/github-markdown.css" type="text/css" charset="utf-8" />
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/github.css" type="text/css" charset="utf-8" />
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/main.css" type="text/css" charset="utf-8" />
+        {% endcompress %}
+        <style>
+            @media (max-width: 512px)  and (-webkit-min-device-pixel-ratio: 1.5),
+                   (max-width: 512px)  and (min-resolution: 1.5dppx),
+                   (max-width: 1024px) and (-webkit-max-device-pixel-ratio: 1.5),
+                   (max-width: 1024px) and (max-resolution: 1.5dppx) {
+                body::before {
+                   background-image: url('{{ STATIC_URL }}img/backgrounds/{% background_image_value %}_1024.jpg');
+                }
+            }
+            @media (min-width: 513px)  and (max-width: 1024px) and (-webkit-min-device-pixel-ratio: 1.5),
+                   (min-width: 513px)  and (max-width: 1024px) and (min-resolution: 1.5dppx),
+                   (min-width: 1025px) and (max-width: 2048px) and (-webkit-max-device-pixel-ratio: 1.5),
+                   (min-width: 1025px) and (max-width: 2048px) and (max-resolution: 1.5dppx)  {
+                body::before {
+                   background-image: url('{{ STATIC_URL }}img/backgrounds/{% background_image_value %}_2048.jpg');
+                }
+            }
+            /*
+            @media (min-width: 1025px) and (-webkit-min-device-pixel-ratio: 1.5),
+                   (min-width: 1025px) and (min-resolution: 1.5dppx),
+                   (min-width: 2049px) and (-webkit-max-device-pixel-ratio: 1.5),
+                   (min-width: 2049px) and (max-resolution: 1.5dppx) {
+              body::before {
+                background-image: url('../img/bg_2880.jpg');
+              }
+            }
+            */
+            {% block style %}{% endblock %}
+        </style>
+
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-33076350-8', 'auto');
+          ga('send', 'pageview');
+
+        </script>
+    </head>
+    <body>
+        <div class="mdl-layout mdl-js-layout has-drawer is-upgraded">
+            <!-- The drawer is always open in large screens. The header is always shown, even in small screens. -->
+            <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+                <header class="mdl-layout__header">
+                    <div class="mdl-layout__header-row">
+                        <span class="mdl-layout-title">Rodolfo De Nadai</span>
+                        <div class="mdl-layout-spacer"></div>
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right">
+                            <label class="mdl-button mdl-js-button mdl-button--icon" for="fixed-header-drawer-exp">
+                                <i class="material-icons">search</i>
+                            </label>
+                            <div class="mdl-textfield__expandable-holder">
+                                <input class="mdl-textfield__input" type="text" name="sample" id="fixed-header-drawer-exp">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Tabs -->
+                    <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+                        <a id="tab-essays" href="#tab-essays" class="mdl-layout__tab {{ active_essays }}">Essays</a>
+                        <a id="tab-resume" href="#tab-resume" class="mdl-layout__tab {{ active_resume }}">Resume / Profile</a>
+                    </div>
+                </header>
+                <main class="mdl-layout__content" style="margin-left: 0px;">
+                    <div class="content-max">
+                        {%block content %}{% endblock %}
+                    </div>
+                    <br /><br />
+                    <footer class="footer-white mdl-mini-footer">
+                        <div class="mdl-mini-footer__left-section">
+                            <ul class="mdl-mini-footer__link-list">
+                                <li>Copyright © 2017 Rodolfo De Nadai. All rights reserved.</li>
+                            </ul>
+                        </div>
+                    </footer>
+                    <div class="mdl-layout__obfuscator"></div>
+                </main>
+            </div>
+        </div>
+    </body>
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <script async id="dsq-count-scr" src="//rdenadaicombr.disqus.com/count.js" async></script>
+    <script async src="https://apis.google.com/js/platform.js" async defer></script>
+    {% load compress %}
+    {% compress js %}
+    <script src="{{ STATIC_URL }}js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="{{ STATIC_URL }}js/highlight.pack.js"></script>
+    <script src="{{ STATIC_URL }}js/main.js" type="text/javascript" charset="utf-8"></script>
+    {% endcompress %}
+    {% block js_libs %}{% endblock %}
+
+    <script type="text/javascript" language="javascript">
+        // Shorthand for $( document ).ready()
+        $(function() {
+            hljs.initHighlightingOnLoad();
+            {% block jquery_block %}{% endblock %}
+
+            $('#tab-home').on('click', function(evt) {
+                location.href = '{% url 'view_index' %}';
+            });
+
+            $('#tab-essays').on('click', function(evt) {
+                location.href = '{% url 'view_blog_index' %}';
+            });
+
+            $('#tab-resume').on('click', function(evt) {
+                location.href = '{% url 'info_view_index' %}';
+            });
+
+            $('#fixed-header-drawer-exp').on('keyup', function(evt) {
+                var keyCode = evt ? (evt.which ? evt.which : evt.keyCode) : event.keyCode;
+                if (keyCode == 13) {
+                    location.href = '{% url 'view_blog_index' %}search/' + $('#fixed-header-drawer-exp').val() + '.html';
+                }
+            });
+        });
+
+        {% block no_jquery_block %}{% endblock %}
+    </script>
+</html>
+{% endspaceless %}
