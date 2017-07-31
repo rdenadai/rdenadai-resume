@@ -134,6 +134,8 @@ STATIC_URL = '/static/'
 UPLOAD_ROOT = MEDIA_ROOT
 MARKDOWN_EXTENSIONS = ['markdown.extensions.extra', 'markdown.extensions.codehilite', 'markdown.extensions.nl2br', 'markdown.extensions.wikilinks']
 LOCALE_PATHS = (os.path.join(PROJECT_PATH, 'locale'),)
+# WhiteNoise settings
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # AWS CONNECTION
 USE_S3 = True

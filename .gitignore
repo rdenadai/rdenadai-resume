@@ -2,6 +2,8 @@
 __pycache__/
 *.py[cod]
 *$py.class
+*.pyc
+*.pyo
 
 # C extensions
 *.so
@@ -9,6 +11,7 @@ __pycache__/
 # Distribution / packaging
 .Python
 env/
+bin/
 build/
 develop-eggs/
 dist/
@@ -21,6 +24,9 @@ parts/
 sdist/
 var/
 wheels/
+static/
+sitestatic/
+venv/
 *.egg-info/
 .installed.cfg
 *.egg
@@ -51,9 +57,20 @@ coverage.xml
 *.mo
 *.pot
 
+# Mr Developer
+.mr.developer.cfg
+.project
+.pydevproject
+
+# Rope
+.ropeproject
+
 # Django stuff:
 *.log
 local_settings.py
+*.pot
+*.pid
+*.sock
 
 # Flask stuff:
 instance/
