@@ -30,6 +30,9 @@ class Persona(models.Model):
     def __unicode__(self):
         return '%s' % self.title
 
+    def __str__(self):
+        return '%s' % self.title
+
     class Meta:
         ordering = ['order', 'title']
 
@@ -41,6 +44,9 @@ class Curriculum(models.Model):
     def __unicode__(self):
         return '%s' % self.title
 
+    def __str__(self):
+        return '%s' % self.title
+
 
 class Project(models.Model):
     title = models.CharField(max_length=100, unique=True)
@@ -49,4 +55,7 @@ class Project(models.Model):
     gplay = models.CharField(max_length=255, null=True, blank=True)
 
     def __unicode__(self):
+        return '%s' % self.title
+
+    def __str__(self):
         return '%s' % self.title

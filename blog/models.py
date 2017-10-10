@@ -20,6 +20,9 @@ class Category(models.Model):
     def __unicode__(self):
         return '%s' % self.name
 
+    def __str__(self):
+        return '%s' % self.name
+
     @permalink
     def get_absolute_url(self):
         return ('view_blog_category', None, {'slug': self.slug})
@@ -42,6 +45,9 @@ class Blog(models.Model):
     posted = models.DateField(db_index=True, auto_now_add=True)
 
     def __unicode__(self):
+        return '%s' % self.title
+
+    def __str__(self):
         return '%s' % self.title
 
     @permalink
