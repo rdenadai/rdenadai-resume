@@ -1,7 +1,6 @@
 from __future__ import unicode_literals
 from django.utils.deconstruct import deconstructible
 from django.db import models
-from django.db.models import permalink
 """Custom S3 storage backends to store files in subfolders."""
 from storages.backends.s3boto import S3BotoStorage
 from resume import settings
@@ -23,7 +22,6 @@ class Category(models.Model):
     def __str__(self):
         return '%s' % self.name
 
-    @permalink
     def get_absolute_url(self):
         return ('view_blog_category', None, {'slug': self.slug})
 
@@ -50,7 +48,6 @@ class Blog(models.Model):
     def __str__(self):
         return '%s' % self.title
 
-    @permalink
     def get_absolute_url(self):
         return ('view_blog_post', None, {'slug': self.slug})
 
