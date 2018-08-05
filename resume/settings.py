@@ -136,7 +136,7 @@ LOCALE_PATHS = (os.path.join(PROJECT_PATH, 'locale'),)
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # AWS CONNECTION
-USE_S3 = False
+USE_S3 = True
 AWS_ACCESS_KEY_ID = ''
 AWS_SECRET_ACCESS_KEY = ''
 AWS_STORAGE_BUCKET_NAME = ''
