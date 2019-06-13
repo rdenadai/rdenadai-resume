@@ -9,7 +9,7 @@ PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
 SECRET_KEY = "r(pr_guckt07xaelii=fkn^qpr3=l=7%bh0_37uebmzndbemqw"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = int(os.environ.get("DEBUG"))
+DEBUG = int(os.environ.get("DEBUG", 0))
 DEBUG = False if DEBUG == 0 else True
 COMPRESS_ENABLED = True
 DEBUG_TOOLBAR_PATCH_SETTINGS = False
