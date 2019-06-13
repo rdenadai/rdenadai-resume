@@ -12,6 +12,7 @@ SECRET_KEY = "r(pr_guckt07xaelii=fkn^qpr3=l=7%bh0_37uebmzndbemqw"
 DEBUG = int(os.environ.get("DEBUG", 0))
 DEBUG = False if DEBUG == 0 else True
 COMPRESS_ENABLED = True
+COMPRESS_OFFLINE = True
 DEBUG_TOOLBAR_PATCH_SETTINGS = False
 TEMPLATE_DEBUG = DEBUG
 COMPRESS_CSS_FILTERS = [
