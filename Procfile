@@ -1,1 +1,1 @@
-web: python ./manage.py collectstatic --noinput; gunicorn resume.wsgi --workers=3 --reload
+web: gunicorn resume.wsgi --workers=3 --reload
