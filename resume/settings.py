@@ -12,7 +12,7 @@ SECRET_KEY = "r(pr_guckt07xaelii=fkn^qpr3=l=7%bh0_37uebmzndbemqw"
 DEBUG = int(os.environ.get("DEBUG", 0))
 DEBUG = False if DEBUG == 0 else True
 COMPRESS_ENABLED = True
-COMPRESS_OFFLINE = True
+COMPRESS_OFFLINE = not DEBUG
 DEBUG_TOOLBAR_PATCH_SETTINGS = False
 TEMPLATE_DEBUG = DEBUG
 COMPRESS_CSS_FILTERS = [
@@ -28,6 +28,7 @@ ALLOWED_HOSTS = ["*", "rdenadai.com.br", "rdenadai-resume.herokuapp.com"]
 # Application definition
 
 INSTALLED_APPS = [
+    "suit",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
