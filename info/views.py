@@ -11,10 +11,14 @@ def index(request):
     if curriculum:
         curriculum = curriculum[0]
     projects = Project.objects.all()
-    return render(request, 'info/index.html', context={
-        'MEDIA_URL': settings.MEDIA_URL,
-        'resume': curriculum,
-        'personas': personas,
-        'projects': projects,
-        'active_resume': 'is-active'
-    })
+    return render(
+        request,
+        "info/index.html",
+        context={
+            "MEDIA_URL": settings.MEDIA_URL,
+            "resume": curriculum,
+            "personas": personas,
+            "projects": projects,
+            "active_resume": "is-active",
+        },
+    )

@@ -1,22 +1,26 @@
 from django.contrib import admin
-from .forms import WhoIAmMarkdownModelForm, PersonaMarkdownModelForm, CurriculumMarkdownModelForm
+from .forms import (
+    WhoIAmMarkdownModelForm,
+    PersonaMarkdownModelForm,
+    CurriculumMarkdownModelForm,
+)
 from info.models import WhoIAm, Persona, Curriculum, Project
 
 
 class WhoIAmAdmin(admin.ModelAdmin):
-    form = WhoIAmMarkdownModelForm
+    form: WhoIAmMarkdownModelForm = WhoIAmMarkdownModelForm
 
 
 class PersonaAdmin(admin.ModelAdmin):
-    form = PersonaMarkdownModelForm
+    form: PersonaMarkdownModelForm = PersonaMarkdownModelForm
 
 
 class CurriculumAdmin(admin.ModelAdmin):
-    form = CurriculumMarkdownModelForm
+    form: CurriculumMarkdownModelForm = CurriculumMarkdownModelForm
 
 
 class ProjectAdmin(admin.ModelAdmin):
-    list_display = ('title', 'site', 'gplay')
+    list_display: tuple = ("title", "site", "gplay")
 
 
 admin.site.register(WhoIAm, WhoIAmAdmin)

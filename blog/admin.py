@@ -4,13 +4,13 @@ from blog.models import Blog, Category
 
 
 class BlogAdmin(admin.ModelAdmin):
-    exclude = ['posted']
-    prepopulated_fields = {'slug': ('title',)}
-    form = MarkdownModelForm
+    exclude: list = ["posted"]
+    prepopulated_fields: dict = {"slug": ("title",)}
+    form: MarkdownModelForm = MarkdownModelForm
 
 
 class CategoryAdmin(admin.ModelAdmin):
-    prepopulated_fields = {'slug': ('name',)}
+    prepopulated_fields: dict = {"slug": ("name",)}
 
 
 admin.site.register(Category, CategoryAdmin)

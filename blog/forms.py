@@ -7,5 +7,5 @@ class MarkdownModelForm(forms.ModelForm):
     body = forms.CharField(widget=AdminPagedownWidget())
 
     class Meta:
-        model = Blog
-        fields = '__all__'
+        model: Blog = Blog
+        fields: str = "__all__"

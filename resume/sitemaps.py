@@ -4,8 +4,8 @@ from info.views import index
 
 
 class StaticViewSitemap(sitemaps.Sitemap):
-    priority = 0.5
-    changefreq = 'daily'
+    priority: float = 0.5
+    changefreq: str = "daily"
 
     def items(self):
         return [index]
