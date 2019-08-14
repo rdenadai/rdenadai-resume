@@ -1,6 +1,6 @@
 boto==2.49.0
 dj-database-url==0.5.0
-Django==2.2.3
+Django==2.2.4
 django-bmemcached==0.2.4
 django-compressor==2.3
 django-markdown==0.8.4
