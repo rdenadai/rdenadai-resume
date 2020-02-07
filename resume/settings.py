@@ -28,7 +28,8 @@ ALLOWED_HOSTS = ["*", "rdenadai.com.br", "rdenadai-resume.herokuapp.com"]
 # Application definition
 
 INSTALLED_APPS = [
-    "suit",
+    # "suit",
+    "blog.apps.SuitConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -41,7 +42,7 @@ INSTALLED_APPS = [
     "compressor",
     "pagedown",
     "info",
-    "blog",
+    "blog.apps.BlogConfig",
 ]
 
 MIDDLEWARE = [
