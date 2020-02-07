@@ -20,7 +20,7 @@ class CurriculumAdmin(admin.ModelAdmin):
 
 
 class ProjectAdmin(admin.ModelAdmin):
-    list_display: tuple = ("title", "site", "gplay")
+    list_display: tuple = ("title", "score", "site", "gplay")
 
 
 admin.site.register(WhoIAm, WhoIAmAdmin)

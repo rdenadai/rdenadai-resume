@@ -10,7 +10,7 @@ def index(request):
     curriculum = Curriculum.objects.all()
     if curriculum:
         curriculum = curriculum[0]
-    projects = Project.objects.all()
+    projects = Project.objects.all().order_by("-score")
     return render(
         request,
         "info/index.html",

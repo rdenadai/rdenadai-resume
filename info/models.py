@@ -56,6 +56,7 @@ class Curriculum(Model):
 class Project(Model):
     title: CharField = CharField(max_length=100, unique=True)
     description: TextField = TextField(max_length=255, null=True, blank=True)
+    score: IntegerField = IntegerField(default=0)
     site: CharField = CharField(max_length=255, null=True, blank=True)
     gplay: CharField = CharField(max_length=255, null=True, blank=True)
 
