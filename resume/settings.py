@@ -6,7 +6,9 @@ LOCAL_INSTANCE = lambda *args: os.path.join(os.path.dirname(__file__), *args)
 PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "r(pr_guckt07xaelii=fkn^qpr3=l=7%bh0_37uebmzndbemqw"
+SECRET_KEY = os.environ.get(
+    "PASSPHRASE", "r(pr_guckt07xaelii=fkn^qpr3=l=7%bh0_37uebmzndbemqw"
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = int(os.environ.get("DEBUG", 0))
@@ -83,7 +85,7 @@ TEMPLATES = [
 # various locations.
 STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.FileSystemFinder",
-    # "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
     # 'django.contrib.staticfiles.finders.DefaultStorageFinder',
     "compressor.finders.CompressorFinder",
 )
@@ -111,7 +113,8 @@ else:
     # Database
     import dj_database_url
 
-    DATABASES = {"default": dj_database_url.config(default="postgres://localhost")}
+    DATABASES = {"default": dj_database_url.config(conn_max_age=600, ssl_require=True)}
+
     CACHES = {
         "default": {
             "BACKEND": "django_bmemcached.memcached.BMemcached",
