@@ -156,6 +156,12 @@ body {
       -ms-flex-direction: column;
           flex-direction: column;
 }
+.btn-links {
+    list-style: none;
+}
+.btn-links > li {
+    display: inline;
+}
 
 
 
@@ -166,8 +172,6 @@ blockquote::before {
 blockquote::after {
     content: none;
 }
-
-
 
 .blog-nav {
   margin: 12px 15px;
@@ -232,4 +236,9 @@ blockquote::after {
 .footer-white {
     background-color: white;
     color: #333;
+}
+
+.list-three {
+    min-width: 700px;
+    text-align: left;
 }
