@@ -12,7 +12,7 @@ SECRET_KEY = os.environ.get(
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = int(os.environ.get("DEBUG", 0))
-DEBUG = False if DEBUG == 0 else True
+DEBUG = True if DEBUG == 0 else False
 COMPRESS_ENABLED = True
 COMPRESS_OFFLINE = not DEBUG
 DEBUG_TOOLBAR_PATCH_SETTINGS = False
