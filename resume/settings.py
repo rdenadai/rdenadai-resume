@@ -14,7 +14,7 @@ SECRET_KEY = os.environ.get(
 DEBUG = int(os.environ.get("DEBUG", 0))
 DEBUG = True if DEBUG == 0 else False
 COMPRESS_ENABLED = True
-COMPRESS_OFFLINE = not DEBUG
+COMPRESS_OFFLINE = DEBUG
 DEBUG_TOOLBAR_PATCH_SETTINGS = False
 TEMPLATE_DEBUG = DEBUG
 COMPRESS_CSS_FILTERS = [
@@ -101,43 +101,43 @@ STATICFILES_DIRS = (
 
 WSGI_APPLICATION = "resume.wsgi.application"
 
-if DEBUG:
-    # Database
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": os.path.join(PROJECT_PATH, "db.sqlite3"),
-        }
-    }
-else:
-    # Database
-    import dj_database_url
+# if DEBUG:
+#     # Database
+#     DATABASES = {
+#         "default": {
+#             "ENGINE": "django.db.backends.sqlite3",
+#             "NAME": os.path.join(PROJECT_PATH, "db.sqlite3"),
+#         }
+#     }
+# else:
+# Database
+import dj_database_url
 
-    DATABASES = {"default": dj_database_url.config(conn_max_age=600, ssl_require=True)}
+DATABASES = {"default": dj_database_url.config(conn_max_age=600, ssl_require=True)}
 
-    CACHES = {
-        "default": {
-            "BACKEND": "django_bmemcached.memcached.BMemcached",
-            "LOCATION": os.environ.get("MEMCACHEDCLOUD_SERVERS").split(","),
-            "TIMEOUT": 500,
-            "OPTIONS": {
-                "username": os.environ.get("MEMCACHEDCLOUD_USERNAME"),
-                "password": os.environ.get("MEMCACHEDCLOUD_PASSWORD"),
-                "no_block": True,
-                "tcp_nodelay": True,
-                "tcp_keepalive": True,
-                "remove_failed": 4,
-                "retry_timeout": 2,
-                "dead_timeout": 10,
-                "_poll_timeout": 2000,
-            },
+CACHES = {
+    "default": {
+        "BACKEND": "django_bmemcached.memcached.BMemcached",
+        "LOCATION": os.environ.get("MEMCACHEDCLOUD_SERVERS").split(","),
+        "TIMEOUT": 500,
+        "OPTIONS": {
+            "username": os.environ.get("MEMCACHEDCLOUD_USERNAME"),
+            "password": os.environ.get("MEMCACHEDCLOUD_PASSWORD"),
+            "no_block": True,
+            "tcp_nodelay": True,
+            "tcp_keepalive": True,
+            "remove_failed": 4,
+            "retry_timeout": 2,
+            "dead_timeout": 10,
+            "_poll_timeout": 2000,
         },
-        "compressor": {
-            "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
-            "LOCATION": "compressor",
-        },
-    }
-    COMPRESS_CACHE_BACKEND = "compressor"
+    },
+    "compressor": {
+        "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+        "LOCATION": "compressor",
+    },
+}
+COMPRESS_CACHE_BACKEND = "compressor"
 
 
 # Password validation
@@ -177,7 +177,7 @@ LOCALE_PATHS = (os.path.join(PROJECT_PATH, "locale"),)
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # AWS CONNECTION
-USE_S3 = not DEBUG
+USE_S3 = DEBUG
 AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
 AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
 AWS_STORAGE_BUCKET_NAME = os.environ.get("AWS_STORAGE_BUCKET_NAME")
