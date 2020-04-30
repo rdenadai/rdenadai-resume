@@ -4,8 +4,9 @@ from blog.models import Blog, Category
 
 
 class BlogAdmin(admin.ModelAdmin):
-    exclude: list = ["posted"]
+    # exclude: list = ["posted"]
     prepopulated_fields: dict = {"slug": ("title",)}
+    list_display: tuple = ("title", "favorite", "published", "posted")
     form: MarkdownModelForm = MarkdownModelForm
 
 
