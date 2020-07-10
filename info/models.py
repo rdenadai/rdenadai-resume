@@ -14,6 +14,9 @@ class MediaS3BotoStorage(S3BotoStorage):
 class WhoIAm(Model):
     text: TextField = TextField()
 
+    def __str__(self):
+        return "Apresentação: Quem sou eu"
+
     def __unicode__(self):
         return f"{self.text}"
 
