@@ -77,6 +77,12 @@ def search_post(request, slug, page=1):
     next_page = True if qtd_publications > limit else False
     before_page = page - 1
     after_page = page + 1
+
+    whoiam = ""
+    whoiams = WhoIAm.objects.all()
+    for hist in whoiams:
+        whoiam += hist.text
+
     return render(
         request,
         "blog/index.html",
@@ -89,6 +95,7 @@ def search_post(request, slug, page=1):
             "before_page": before_page,
             "after_page": after_page,
             "active_essays": "is-active",
+            "whoiam": whoiam,
         },
     )
 
