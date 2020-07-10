@@ -49,7 +49,7 @@ urlpatterns = [
     url(r"^admin/", admin.site.urls),
     url(r"^info/", include("info.urls")),
     url(r"^blog/", include("blog.urls")),
-    url(r".well-known/acme-challenge/test/", wellknown),
+    url(r".well-known/acme-challenge/<str:wellknown>", wellknown),
     url(
         r"^sitemap\.xml$",
         sitemap,
