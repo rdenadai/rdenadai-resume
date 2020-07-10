@@ -1,11 +1,16 @@
 # -*- coding: utf-8 -*-
 
 from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponse
 from blog.models import Blog, Category
 from info.models import WhoIAm
 from resume import settings
 from datetime import date
 from django.db.models import Q
+
+
+def wellknown(request):
+    return HttpResponse("Ok")
 
 
 def index(request, page=0):
