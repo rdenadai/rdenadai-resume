@@ -16,7 +16,6 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from blog.views import index as blog_index
-from blog.views import wellknown
 
 from django.conf import settings
 from django.conf.urls.static import static
@@ -49,7 +48,6 @@ urlpatterns = [
     url(r"^admin/", admin.site.urls),
     url(r"^info/", include("info.urls")),
     url(r"^blog/", include("blog.urls")),
-    url(r".well-known/acme-challenge/", wellknown),
     url(
         r"^sitemap\.xml$",
         sitemap,
