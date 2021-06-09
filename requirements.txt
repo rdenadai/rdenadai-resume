@@ -2,7 +2,7 @@ flake8==3.8.2
 black==19.10b0
 boto==2.49.0
 dj-database-url==0.5.0
-Django==2.2.20
+Django==2.2.22
 django-bmemcached==0.3.0
 django-compressor==2.4
 django-markdown==0.8.4
