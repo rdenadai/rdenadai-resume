@@ -42,10 +42,11 @@ handler403 = "blog.views.view_403"
 handler404 = "blog.views.view_404"
 handler500 = "blog.views.view_500"
 
+admin_url = os.environ.get("ADMIN", "admin")
 
 urlpatterns = [
     url(r"^$", blog_index, name="view_index"),
-    url(r"^admin/", admin.site.urls),
+    url(r"^{}/".format(admin_url), admin.site.urls),
     url(r"^info/", include("info.urls")),
     url(r"^blog/", include("blog.urls")),
     url(
