@@ -6,9 +6,7 @@ LOCAL_INSTANCE = lambda *args: os.path.join(os.path.dirname(__file__), *args)
 PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get(
-    "PASSPHRASE", "r(pr_guckt07xaelii=fkn^qpr3=l=7%bh0_37uebmzndbemqw"
-)
+SECRET_KEY = os.environ.get("PASSPHRASE", "r(pr_guckt07xaelii=fkn^qpr3=l=7%bh0_37uebmzndbemqw")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = int(os.environ.get("DEBUG", 0))
@@ -113,17 +111,13 @@ else:
     # Database
     import dj_database_url
 
-    DATABASES = {"default": dj_database_url.config(conn_max_age=600, ssl_require=True)}
+    DATABASES = {"default": dj_database_url.config(conn_max_age=600, ssl_require=False)}
 
     CACHES = {
         "default": {
             "BACKEND": "django_bmemcached.memcached.BMemcached",
-            "LOCATION": os.environ.get("MEMCACHEDCLOUD_SERVERS").split(","),
+            "LOCATION": "resume-cache",
             "TIMEOUT": 500,
-            "OPTIONS": {
-                "username": os.environ.get("MEMCACHEDCLOUD_USERNAME"),
-                "password": os.environ.get("MEMCACHEDCLOUD_PASSWORD"),
-            },
         },
         "compressor": {
             "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
@@ -135,9 +129,7 @@ else:
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
-    },
+    {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
     {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
     {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},

@@ -1,0 +1,35 @@
+version: "3"
+
+services:
+  resume:
+    build: .
+    entrypoint: ./entrypoint.sh
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+      - "5678:5678"
+    environment:
+      MODE: production
+      MIGRATE: "no"
+      DEBUG: 1
+      ADMIN: rdenadai
+      AWS_ACCESS_KEY_ID: KEY
+      AWS_SECRET_ACCESS_KEY: SECRET
+      AWS_STORAGE_BUCKET_NAME: rdenadai-blog
+      DATABASE_URL: postgres://USERNAME:PASSWORD@SERVER/DATABASE
+      DISABLE_COLLECTSTATIC: 1
+      PASSPHRASE: PASSPHRASE
+    volumes:
+      - ./:/code
+  resume-cache:
+    image: memcached:1.6.17-alpine3.16
+  postgres:
+    image: postgres
+    hostname: postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: PASSWORD
+    ports:
+      - 5432:5432
+    volumes:
+      - /home/ubuntu/pgdata:/var/lib/postgresql/data
