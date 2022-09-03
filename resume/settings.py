@@ -116,7 +116,7 @@ else:
     CACHES = {
         "default": {
             "BACKEND": "django_bmemcached.memcached.BMemcached",
-            "LOCATION": "resume-cache",
+            "LOCATION": "memcache",
             "TIMEOUT": 500,
         },
         "compressor": {

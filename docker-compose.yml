@@ -21,7 +21,7 @@ services:
       PASSPHRASE: PASSPHRASE
     volumes:
       - ./:/code
-  resume-cache:
+  memcache:
     image: memcached:1.6.17-alpine3.16
   postgres:
     image: postgres
