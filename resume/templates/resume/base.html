@@ -25,23 +25,24 @@
     <link rel="stylesheet" href="{{ STATIC_URL }}css/main.css" type="text/css" charset="utf-8" />
     {% endcompress %}
     <style>
+        
         @media (max-width: 512px) and (-webkit-min-device-pixel-ratio: 1.5),
         (max-width: 512px) and (min-resolution: 1.5dppx),
-        (max-width: 1024px) and (-webkit-max-device-pixel-ratio: 1.5)
+        (max-width: 1024px) and (-webkit-max-device-pixel-ratio: 1.5),
         (max-width: 1024px) and (max-resolution: 1.5dppx) {
             body::before {
                 /*background-image: url('{{ STATIC_URL }}img/backgrounds/{% background_image_value %}_1024.jpg');*/
-                background-color: efefef;
+                background-color: #efefef;
             }
         }
 
         @media (min-width: 513px) and (max-width: 1024px) and (-webkit-min-device-pixel-ratio: 1.5),
         (min-width: 513px) and (max-width: 1024px) and (min-resolution: 1.5dppx),
-        (min-width: 1025px) and (max-width: 2048px) and (-webkit-max-device-pixel-ratio: 1.5)
+        (min-width: 1025px) and (max-width: 2048px) and (-webkit-max-device-pixel-ratio: 1.5),
         (min-width: 1025px) and (max-width: 2048px) and (max-resolution: 1.5dppx) {
             body::before {
                 /*background-image: url('{{ STATIC_URL }}img/backgrounds/{% background_image_value %}_2048.jpg');*/
-                background-color: efefef;
+                background-color: #efefef;
             }
         }
 
@@ -110,7 +111,7 @@
                 <footer class="footer-white mdl-mini-footer">
                     <div class="mdl-mini-footer__left-section">
                         <ul class="mdl-mini-footer__link-list">
-                            <li>Copyright © 2020 Rodolfo De Nadai. All rights reserved.</li>
+                            <li>Copyright © 2022 Rodolfo De Nadai. All rights reserved.</li>
                         </ul>
                     </div>
                 </footer>
