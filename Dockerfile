@@ -1,4 +1,4 @@
-FROM python:3.9.13-slim-buster
+FROM python:3.9.14-slim-buster
 
 SHELL ["/bin/bash", "-o", "pipefail", "-e", "-u", "-x", "-c"]
 
@@ -24,7 +24,7 @@ RUN apt-get update && \
     libpq-dev gcc libssl-dev zlib1g-dev \
     libbz2-dev libreadline-dev libsqlite3-dev wget curl \
     libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev && \
-    apt clean
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN pip install pip setuptools==57.5.0 --upgrade && \
     pip install --no-cache-dir -r requirements.txt
