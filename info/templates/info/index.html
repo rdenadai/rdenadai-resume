@@ -30,11 +30,14 @@
             <div class="content is-hidden" id="persona-panel">
                 {% for person in personas %}
                     <h5>{{ person.title|safe }}</h5>
-                        {% if person.file_link %}
-                            <a href="{{ MEDIA_URL }}{{ person.file }}" target="_blank">{{ person.file_link }}</a>
-                        {% else %}
-                            <a href="{{ person.link }}" target="_blank">{{ person.link }}</a>
-                        {% endif %}
+                    <div class="block">
+                    {% if person.file_link %}
+                        <a href="{{ MEDIA_URL }}{{ person.file }}" class="button is-light" target="_blank">{{ person.file_link }}</a>
+                    {% else %}
+                        <a href="{{ person.link }}" class="button is-light" target="_blank">{{ person.link }}</a>
+                    {% endif %}
+                    </div>
+                    <br /><br />
                     <div class="blog-text">
                         <article class="markdown-body">
                             {{ person.body|markdownify|safe }}
