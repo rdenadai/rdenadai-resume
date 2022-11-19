@@ -64,14 +64,14 @@
             </div>
         </nav>
         <section class="section">
-            <div class="container is-fluid" style="max-width: 1024px !important;">
+            <div class="container" style="max-width: 1024px !important;">
                 <div class="tabs is-large">
                     <ul>
                         <li id="tab-essays" href="#tab-essays" class="{{ active_essays }}"><a href="{% url 'view_blog_index' %}">Essays</a></li>
                         <li id="tab-resume" href="#tab-resume" class="{{ active_resume }}"><a href="{% url 'info_view_index' %}">Resume / Profile</a></li>
                     </ul>
                 </div>
-                <div class="container is-fluid">
+                <div class="container">
                     {% block content %}{% endblock %}
                 </div>
             </div>
