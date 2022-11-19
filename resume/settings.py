@@ -14,7 +14,7 @@ DEBUG = True if DEBUG == 0 else False
 DEBUG_TOOLBAR_PATCH_SETTINGS = False
 TEMPLATE_DEBUG = DEBUG
 
-ALLOWED_HOSTS = ("localhost", "rdenadai.com.br")
+ALLOWED_HOSTS = ("*", "rdenadai.com.br")
 
 
 # Application definition
