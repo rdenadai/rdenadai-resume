@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 
-from django.shortcuts import render, get_object_or_404
+from datetime import date
+
+from django.db.models import Q
+from django.shortcuts import get_object_or_404, render
+
 from blog.models import Blog, Category
 from info.models import WhoIAm
 from resume import settings
-from datetime import date
-from django.db.models import Q
 
 
 def index(request, page=0):
@@ -102,9 +104,7 @@ def search_post(request, slug, page=1):
 
 def view_category(request, slug, page=1):
     category = get_object_or_404(Category, slug=slug)
-    publications = Blog.objects.filter(published=True, category=category).order_by(
-        "-posted"
-    )
+    publications = Blog.objects.filter(published=True, category=category).order_by("-posted")
     qtd_publications = publications.count()
     page = int(page)
     start = page - 1

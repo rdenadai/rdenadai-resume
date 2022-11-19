@@ -11,25 +11,15 @@ SECRET_KEY = os.environ.get("PASSPHRASE", "r(pr_guckt07xaelii=fkn^qpr3=l=7%bh0_3
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = int(os.environ.get("DEBUG", 0))
 DEBUG = True if DEBUG == 0 else False
-COMPRESS_ENABLED = True
-COMPRESS_OFFLINE = not DEBUG
 DEBUG_TOOLBAR_PATCH_SETTINGS = False
 TEMPLATE_DEBUG = DEBUG
-COMPRESS_CSS_FILTERS = [
-    "compressor.filters.css_default.CssAbsoluteFilter",
-    "compressor.filters.cssmin.CSSMinFilter",
-]
-COMPRESS_JS_FILTERS = ["compressor.filters.jsmin.JSMinFilter"]
 
-
-ALLOWED_HOSTS = ["*", "rdenadai.com.br", "rdenadai-resume.herokuapp.com"]
+ALLOWED_HOSTS = ("localhost", "rdenadai.com.br")
 
 
 # Application definition
 
-INSTALLED_APPS = [
-    # "suit",
-    "blog.apps.SuitConfig",
+INSTALLED_APPS = (
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -39,16 +29,14 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "storages",
-    "compressor",
     "pagedown",
     "info",
     "blog.apps.BlogConfig",
-]
+)
 
-MIDDLEWARE = [
+MIDDLEWARE = (
     "django.middleware.cache.UpdateCacheMiddleware",
     "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -57,37 +45,34 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.gzip.GZipMiddleware",
     "django.middleware.cache.FetchFromCacheMiddleware",
-]
+)
 
 ROOT_URLCONF = "resume.urls"
 
-TEMPLATES = [
+TEMPLATES = (
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [os.path.join(PROJECT_PATH, "templates")],
         "APP_DIRS": True,
         "OPTIONS": {
-            "context_processors": [
+            "context_processors": (
                 "django.template.context_processors.debug",
                 "django.template.context_processors.csrf",
                 "django.template.context_processors.request",
                 "django.template.context_processors.static",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-            ]
+            )
         },
-    }
-]
+    },
+)
 
 # List of finder classes that know how to find static files in
 # various locations.
 STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
-    # 'django.contrib.staticfiles.finders.DefaultStorageFinder',
-    "compressor.finders.CompressorFinder",
 )
-
 # Additional locations of static files
 STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
@@ -117,23 +102,18 @@ else:
         "default": {
             "BACKEND": "django_bmemcached.memcached.BMemcached",
             "LOCATION": "memcache",
-            "TIMEOUT": 500,
-        },
-        "compressor": {
-            "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
-            "LOCATION": "compressor",
+            "TIMEOUT": 5,
         },
     }
-    COMPRESS_CACHE_BACKEND = "compressor"
 
 
 # Password validation
-AUTH_PASSWORD_VALIDATORS = [
+AUTH_PASSWORD_VALIDATORS = (
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
     {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
     {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
-]
+)
 
 
 # Internationalization
@@ -145,21 +125,18 @@ USE_TZ = True
 SITE_ID = 2
 
 # Static files (CSS, JavaScript, Images)
-MEDIA_ROOT = os.path.join(PROJECT_PATH, "../media/")
-STATIC_ROOT = os.path.join(PROJECT_PATH, "../static/")
-COMPRESS_ROOT = STATIC_ROOT
+MEDIA_ROOT = "media/"
+STATIC_ROOT = "static/"
 MEDIA_URL = "/media/"
 STATIC_URL = "/static/"
 UPLOAD_ROOT = MEDIA_ROOT
-MARKDOWN_EXTENSIONS = [
+MARKDOWN_EXTENSIONS = (
     "markdown.extensions.extra",
     "markdown.extensions.codehilite",
     "markdown.extensions.nl2br",
     "markdown.extensions.wikilinks",
-]
+)
 LOCALE_PATHS = (os.path.join(PROJECT_PATH, "locale"),)
-# WhiteNoise settings
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # AWS CONNECTION
 USE_S3 = not DEBUG
@@ -167,7 +144,7 @@ AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
 AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
 AWS_STORAGE_BUCKET_NAME = os.environ.get("AWS_STORAGE_BUCKET_NAME")
 AWS_QUERYSTRING_AUTH = False
-S3_URL = "https://%s.s3.amazonaws.com/" % AWS_STORAGE_BUCKET_NAME
+S3_URL = f"https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/"
 
 if USE_S3:
     DEFAULT_FILE_STORAGE = "home.s3utils.MediaS3BotoStorage"

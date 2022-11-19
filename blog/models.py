@@ -1,19 +1,21 @@
 from __future__ import unicode_literals
-from django.utils.deconstruct import deconstructible
-from django.db.models import Model
+
 from django.db.models import (
+    BooleanField,
     CharField,
+    DateField,
+    ImageField,
+    IntegerField,
+    ManyToManyField,
+    Model,
     SlugField,
     TextField,
-    IntegerField,
-    ImageField,
-    DateField,
-    BooleanField,
-    ManyToManyField,
 )
+from django.utils.deconstruct import deconstructible
 
 """Custom S3 storage backends to store files in subfolders."""
 from storages.backends.s3boto import S3BotoStorage
+
 from resume import settings
 
 
@@ -49,7 +51,7 @@ class Blog(Model):
     image: ImageField = ImageField(
         upload_to="img/blog/",
         storage=upload_storage,
-        default=settings.MEDIA_URL + "/img/flow.jpg",
+        default=settings.MEDIA_URL + "img/flow.jpg",
     )
     body: TextField = TextField()
     favorite: IntegerField = IntegerField(default=0)

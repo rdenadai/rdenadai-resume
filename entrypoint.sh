@@ -1,7 +1,6 @@
 #!/bin/bash
 
 cd /code
-python ./manage.py compress --force
 python ./manage.py collectstatic --no-input
 
 if [ "$MIGRATE" = "yes" ]; then

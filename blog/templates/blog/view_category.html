@@ -2,89 +2,45 @@
 {% load i18n %}
 
 {%block content %}
-<div class="mdl-grid">
-    <div class="mdl-cell mdl-cell--12-col">
-        <div id="page-content">
-            {% for publication in publications %}
-            <div class="blog-card-wide mdl-card mdl-shadow--2dp">
-                <div class="mdl-card__title" style="background: url('{{ MEDIA_URL }}{{ publication.image }}') center / cover; height: 250px;">
-                    <h2 class="mdl-card__title-text blog-title"><strong>{{ publication.title|safe }}</strong></h2>
-                </div>
-                <div class="mdl-card__supporting-text">
-                    {{ publication.description|safe|linebreaks }}
+<div class="content">
+    {% for publication in publications %}
+    <div class="card">
+        <div class="card-image">
+            <figure class="image" style="margin: 0 !important;">
+                <img src="{{ MEDIA_URL }}{{ publication.image }}" style="max-height: 300px;" />
+            </figure>
+        </div>
+        <div class="card-content">
+            <p class="title"><strong>{{ publication.title|safe }}</strong></p>
+            <p class="block">{{ publication.description|safe|linebreaks }}</p>
+            <p class="block">
+                <div class="tags are-medium">
                     {% for category in publication.category.all %}
-                        <a href="/blog/category/1/{{ category.slug }}.html" class="label label-default"><i class="fa fa-bookmark"></i>&nbsp;{{ category }}</a>
+                    <span class="tag is-light" style="color: #c8c8c8;"><a href="/blog/category/1/{{ category.slug }}.html">{{ category }}</a></span>
                     {% endfor %}
                 </div>
-                <div class="mdl-card__actions mdl-card--border">
-                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="/blog/view/{{ publication.slug }}.html">
-                        {% blocktrans %}Read publication{% endblocktrans %}
-                    </a>
-                </div>
-                <div class="mdl-card__menu">
-                    <button id="btn-share-slugname{{ publication.slug }}" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-                        <i class="material-icons">share</i>
-                    </button>
-                    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="btn-share-slugname{{ publication.slug }}">
-                        <li class="mdl-menu__item">
-                            <a class="btn-share" href="javascript:void(0);" onclick="window.open('http://twitter.com/intent/tweet?text={{ publication.title }} =>&url=http://{{ request.META.HTTP_HOST }}/blog/view/{{ publication.slug }}.html&via=rdenadai', 'page','toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=500,height=300')">
-                                <button class="btn-twitter mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
-                                    <i class="fa fa-twitter"></i>
-                                </button>&nbsp;&nbsp;Twitter
-                            </a>
-                        </li>
-                        <li class="mdl-menu__item">
-                            <a class="btn-share" href="javascript:void(0);" onclick="window.open('http://www.facebook.com/share.php?u=http://{{ request.META.HTTP_HOST }}/blog/view/{{ publication.slug }}.html&title={{ publication.title }}', 'page','toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=500,height=300');">
-                                <button class="btn-facebook mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
-                                    <i class="fa fa-facebook"></i>
-                                </button>&nbsp;&nbsp;Facebook
-                            </a>
-                        </li>
-                        <li class="mdl-menu__item">
-                            <a class="btn-share" href="javascript:void(0);" onclick="window.open('https://plus.google.com/share?url=http://{{ request.META.HTTP_HOST }}/blog/view/{{ publication.slug }}.html', 'page','toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=500,height=300');">
-                                <button class="btn-gplus mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
-                                    <i class="fa fa-google-plus"></i>
-                                </button>&nbsp;&nbsp;Google+
-                            </a>
-                        </li>
-                        <li class="mdl-menu__item">
-                            <a class="btn-share" href="javascript:void(0);" onclick="window.open('http://www.linkedin.com/shareArticle?mini=true&url=http://{{ request.META.HTTP_HOST }}/blog/view/{{ publication.slug }}.html&title={{ publication.title }}&source=rdenadai.com.br', 'page','toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=500,height=300');">
-                                <button class="btn-linkedin mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
-                                    <i class="fa fa-linkedin"></i>
-                                </button>&nbsp;&nbsp;Linked In
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <br />
-            {% endfor %}
-            <nav class="blog-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
-                {% if previous_page %}
-                <a href="/blog/category/{{ before_page }}/{{ category.slug }}.html" class="blog-nav__button">
-                    <button data-upgraded=",MaterialButton,MaterialRipple" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                        <i class="material-icons">arrow_back</i>
-                        <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span>
-                    </button>
-                    {% blocktrans %}Newer{% endblocktrans %}
-                </a>
-                {% endif %}
-                <div class="section-spacer"></div>
-                {% if next_page %}
-                <a href="/blog/category/{{ after_page }}/{{ category.slug }}.html" class="blog-nav__button">
-                    {% blocktrans %}Older{% endblocktrans %}
-                    <button data-upgraded=",MaterialButton,MaterialRipple" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--  grey-900" role="presentation">
-                        <i class="material-icons">arrow_forward</i>
-                        <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span>
-                    </button>
-                </a>
-                {% endif %}
-            </nav>
+            </p>
         </div>
-    </div>
+        <footer class="card-footer">
+            <a href="/blog/view/{{ publication.slug }}.html" class="card-footer-item" title="{% blocktrans %}Read publication{% endblocktrans %}">{% blocktrans %}Read publication{% endblocktrans %}</a>
+            <a href="javascript:void(0);" onclick="window.open('http://twitter.com/intent/tweet?text={{ publication.title }} =>&url=http://{{ request.META.HTTP_HOST }}/blog/view/{{ publication.slug }}.html&via=rdenadai', 'page','toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=500,height=300')" class="card-footer-item" title="Share on Twitter"><i class="fa fa-twitter"></i>&nbsp;&nbsp;Twitter</a>
+            <a href="javascript:void(0);" onclick="window.open('http://www.facebook.com/share.php?u=http://{{ request.META.HTTP_HOST }}/blog/view/{{ publication.slug }}.html&title={{ publication.title }}', 'page','toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=500,height=300');" class="card-footer-item" title="Share on Facebook"><i class="fa fa-facebook"></i>&nbsp;&nbsp;Facebook</a>
+            <a href="javascript:void(0);" onclick="window.open('http://www.linkedin.com/shareArticle?mini=true&url=http://{{ request.META.HTTP_HOST }}/blog/view/{{ publication.slug }}.html&title={{ publication.title }}&source=rdenadai.com.br', 'page','toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=500,height=300');" class="card-footer-item" title="Share on LinkedIn"><i class="fa fa-linkedin"></i>&nbsp;&nbsp;LinkedIn</a>
+        </footer>
+    </div><br />
+    {% endfor %}
+    <br />
+    <nav class="pagination" role="navigation" aria-label="pagination">
+        {% if previous_page %}
+        <a href="/blog/{{ before_page }}/" class="pagination-previous button is-light">
+            <i class="fa fa-solid fa-arrow-left"></i>&nbsp;&nbsp;{% blocktrans %}Older{% endblocktrans %}
+        </a>
+        {% endif %}
+        {% if next_page %}
+        <a href="/blog/{{ after_page }}/" class="pagination-next button is-light">
+            {% blocktrans %}Newer{% endblocktrans %}&nbsp;&nbsp;<i class="fa fa-solid fa-arrow-right"></i>
+        </a>
+        {% endif %}
+    </nav>
 </div>
-{% endblock %}
-
-{% block jquery_block %}
-
 {% endblock %}

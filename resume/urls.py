@@ -15,19 +15,19 @@ Including another URLconf
 """
 import os
 
-from django.conf.urls import url, include
-from django.contrib import admin
-from blog.views import index as blog_index
-
 from django.conf import settings
+from django.conf.urls import include, url
 from django.conf.urls.static import static
-from django.views.generic import TemplateView
-
+from django.contrib import admin
 from django.contrib.sitemaps import GenericSitemap
 from django.contrib.sitemaps.views import sitemap
-from .sitemaps import StaticViewSitemap
+from django.views.generic import TemplateView
+from django.views.static import serve
 
 from blog.models import Blog, Category
+from blog.views import index as blog_index
+
+from .sitemaps import StaticViewSitemap
 
 blog_dict = {
     "queryset": Blog.objects.all(),
@@ -46,7 +46,7 @@ handler500 = "blog.views.view_500"
 
 admin_url = os.environ.get("ADMIN", "admin")
 
-urlpatterns = [
+urlpatterns = (
     url(r"^$", blog_index, name="view_index"),
     url(r"^{}/".format(admin_url), admin.site.urls),
     url(r"^info/", include("info.urls")),
@@ -65,9 +65,13 @@ urlpatterns = [
     ),
     url(
         r"^robots\.txt$",
-        TemplateView.as_view(
-            template_name="resume/robots.txt", content_type="text/plain"
-        ),
+        TemplateView.as_view(template_name="resume/robots.txt", content_type="text/plain"),
         name="robots.txt",
     ),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    url(
+        r"^static/(?P<path>.*)$",
+        serve,
+        {"document_root": settings.STATIC_ROOT},
+        name="django.views.static.serve",
+    ),
+)
