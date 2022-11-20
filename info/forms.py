@@ -1,6 +1,7 @@
 from django import forms
 from pagedown.widgets import AdminPagedownWidget
-from .models import WhoIAm, Persona, Curriculum
+
+from .models import Curriculum, Persona, WhoIAm
 
 
 class WhoIAmMarkdownModelForm(forms.ModelForm):

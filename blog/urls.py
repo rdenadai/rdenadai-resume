@@ -1,8 +1,6 @@
-# -*- coding: utf-8 -*-
-
 from django.conf.urls import url
-import blog.views
 
+import blog.views
 
 urlpatterns = [
     url(r"^$", blog.views.index, name="view_blog_index"),

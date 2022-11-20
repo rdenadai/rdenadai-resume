@@ -1,14 +1,22 @@
 from __future__ import unicode_literals
-from django.db.models import Model
-from django.db.models import CharField, FileField, TextField, IntegerField
+
+from django.db.models import CharField, FileField, IntegerField, Model, TextField
 from django.utils.deconstruct import deconstructible
-from storages.backends.s3boto import S3BotoStorage
+from storages.backends.s3boto3 import S3Boto3Storage
+
 from resume import settings
 
 
 @deconstructible
-class MediaS3BotoStorage(S3BotoStorage):
+class MediaS3BotoStorage(S3Boto3Storage):
     location: str = "media"
+    bucket_name: str = "rdenadai-blog"
+
+    # Overriding function because some media files are stored with '/media' prefixed (which causes problems)
+    def _normalize_name(self, name):
+        if name.startswith("/media"):
+            name = name.replace("/media/", "")
+        return super()._normalize_name(name)
 
 
 class WhoIAm(Model):
@@ -30,7 +38,7 @@ class Persona(Model):
     file: FileField = FileField(
         upload_to="file/blog/",
         storage=upload_storage,
-        default=settings.MEDIA_URL + "/img/flow.jpg",
+        default=settings.MEDIA_URL + "img/flow.jpg",
     )
     body: TextField = TextField()
     order: IntegerField = IntegerField(default=0)

@@ -1,10 +1,8 @@
 from django.contrib import admin
-from .forms import (
-    WhoIAmMarkdownModelForm,
-    PersonaMarkdownModelForm,
-    CurriculumMarkdownModelForm,
-)
-from info.models import WhoIAm, Persona, Curriculum, Project
+
+from info.models import Curriculum, Persona, Project, WhoIAm
+
+from .forms import CurriculumMarkdownModelForm, PersonaMarkdownModelForm, WhoIAmMarkdownModelForm
 
 
 class WhoIAmAdmin(admin.ModelAdmin):

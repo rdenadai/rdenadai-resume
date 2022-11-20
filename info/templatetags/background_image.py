@@ -1,13 +1,14 @@
+from random import choice
+
 from django import template
-import random
 
 register = template.Library()
 
 
 class BackgroundImageChooser(template.Node):
     def render(self, context):
-        return random.choice(
-            [
+        return choice(
+            (
                 "bg_1",
                 "bg_2",
                 "bg_3",
@@ -23,7 +24,7 @@ class BackgroundImageChooser(template.Node):
                 "bg_13",
                 "bg_14",
                 "bg_15",
-            ]
+            )
         )
 
 

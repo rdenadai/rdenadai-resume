@@ -1,8 +1,8 @@
-# -*- coding: utf-8 -*-
-
 from django.shortcuts import render
+
 from resume import settings
-from .models import Persona, Curriculum, Project
+
+from .models import Curriculum, Persona, Project
 
 
 def index(request):

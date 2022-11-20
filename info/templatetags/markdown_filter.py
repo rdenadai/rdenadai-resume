@@ -1,5 +1,5 @@
 from django import template
-import markdown
+from markdown import markdown
 
 register = template.Library()
 
@@ -7,7 +7,7 @@ register = template.Library()
 @register.filter
 def markdownify(text):
     # safe_mode governs how the function handles raw HTML
-    return markdown.markdown(
+    return markdown(
         text,
         extensions=[
             "markdown.extensions.nl2br",

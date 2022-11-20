@@ -147,8 +147,8 @@ AWS_QUERYSTRING_AUTH = False
 S3_URL = f"https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/"
 
 if USE_S3:
-    DEFAULT_FILE_STORAGE = "home.s3utils.MediaS3BotoStorage"
-    THUMBNAIL_DEFAULT_STORAGE = "home.s3utils.MediaS3BotoStorage"
+    DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+    THUMBNAIL_DEFAULT_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
     MEDIA_URL = S3_URL + "media/"
     AWS_HEADERS = {  # see http://developer.yahoo.com/performance/rules.html#expires
         "Expires": "Thu, 31 Dec 2099 20:00:00 GMT",

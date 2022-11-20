@@ -1,6 +1,8 @@
 from django.contrib import admin
-from .forms import MarkdownModelForm
+
 from blog.models import Blog, Category
+
+from .forms import MarkdownModelForm
 
 
 class BlogAdmin(admin.ModelAdmin):

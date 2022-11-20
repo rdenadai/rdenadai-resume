@@ -14,14 +14,21 @@ from django.db.models import (
 from django.utils.deconstruct import deconstructible
 
 """Custom S3 storage backends to store files in subfolders."""
-from storages.backends.s3boto import S3BotoStorage
+from storages.backends.s3boto3 import S3Boto3Storage
 
 from resume import settings
 
 
 @deconstructible
-class MediaS3BotoStorage(S3BotoStorage):
+class MediaS3BotoStorage(S3Boto3Storage):
     location: str = "media"
+    bucket_name: str = "rdenadai-blog"
+
+    # Overriding function because some media files are stored with '/media' prefixed (which causes problems)
+    def _normalize_name(self, name):
+        if name.startswith("/media"):
+            name = name.replace("/media/", "")
+        return super()._normalize_name(name)
 
 
 class Category(Model):

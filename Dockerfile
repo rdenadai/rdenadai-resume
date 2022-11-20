@@ -3,8 +3,6 @@ FROM python:3.10.8-slim-buster
 SHELL ["/bin/bash", "-o", "pipefail", "-e", "-u", "-x", "-c"]
 
 WORKDIR /code
-COPY ./entrypoint.sh .
-COPY ./requirements.txt .
 
 RUN apt-get install -y tzdata
 
@@ -30,8 +28,12 @@ RUN apt-get update && \
     libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN pip install pip setuptools==57.5.0 --upgrade && \
+COPY ./requirements.txt .
+
+RUN pip install pip setuptools==65.6.0 --upgrade && \
     pip install --no-cache-dir -r requirements.txt
+
+COPY ./entrypoint.sh .
 
 ENTRYPOINT ["dumb-init", "--"]
 CMD ["tail", "-f", "/dev/null"]
