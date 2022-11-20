@@ -49,12 +49,12 @@
     <nav class="pagination" role="navigation" aria-label="pagination">
         {% if previous_page %}
         <a href="/blog/{{ before_page }}/" class="pagination-previous button is-light">
-            {% blocktrans %}Newer{% endblocktrans %}&nbsp;&nbsp;<i class="fa fa-solid fa-arrow-right"></i>
+            {% blocktrans %}Newer{% endblocktrans %}&nbsp;&nbsp;<i class="fa fa-solid fa-arrow-left"></i>
         </a>
         {% endif %}
         {% if next_page %}
         <a href="/blog/{{ after_page }}/" class="pagination-next button is-light">
-            <i class="fa fa-solid fa-arrow-left"></i>&nbsp;&nbsp;{% blocktrans %}Older{% endblocktrans %}
+            <i class="fa fa-solid fa-arrow-right"></i>&nbsp;&nbsp;{% blocktrans %}Older{% endblocktrans %}
         </a>
         {% endif %}
     </nav>
