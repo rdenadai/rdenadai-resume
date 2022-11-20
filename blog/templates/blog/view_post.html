@@ -17,7 +17,7 @@
     <div class="card-content">
         <p class="title"><strong>{{ post.title|safe }}</strong></p>
         <hr />
-        <p class="block"><div style="width: 100%; text-align: right; color: #999;">{% blocktrans %}Posted{% endblocktrans %} {{ days_ago }} {% blocktrans %}day(s) ago{% endblocktrans %}</div></p>
+        <p class="block"><div style="width: 100%; text-align: right; color: #999;">{% blocktrans %}Posted{% endblocktrans %} {{ post_passed_time }}</div></p>
         <p class="block">
             <div class="blog-text">
                 <article class="markdown-body">

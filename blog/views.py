@@ -45,13 +45,16 @@ def view_post(request, slug):
     post = get_object_or_404(Blog, slug=slug)
     now = date.today()
     days_ago = (now - post.posted).days
+    post_passed_time = f"{days_ago} days ago" if days_ago > 1 else "yesterday"
+    if days_ago >= 365:
+        post_passed_time = f"{days_ago // 365} years ago"
     return render(
         request,
         "blog/view_post.html",
         {
             "MEDIA_URL": settings.MEDIA_URL,
             "post": post,
-            "days_ago": days_ago,
+            "post_passed_time": post_passed_time,
             "active_essays": "is-active",
         },
     )
