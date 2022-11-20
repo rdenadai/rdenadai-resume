@@ -102,7 +102,7 @@ else:
         "default": {
             "BACKEND": "django_bmemcached.memcached.BMemcached",
             "LOCATION": "memcache",
-            "TIMEOUT": 5,
+            "TIMEOUT": 300,
         },
     }
 
